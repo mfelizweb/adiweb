@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function AuthCallbackPage() {
+export default function CallbackInner() {
   const params = useSearchParams();
   const router = useRouter();
 
