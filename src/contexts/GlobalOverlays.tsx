@@ -40,12 +40,12 @@ function ModalBase({
 /* ---------------- MAIN COMPONENT ---------------- */
 export default function GlobalOverlays() {
   const {
-    showWelcome,
+ 
     showLanguage,
     showState,
     showFeedback,
     showLogin,
-    closeAll,
+    closeAll, 
   } = useOverlay();
 
   const { language: lang, selectLanguage } = useLanguage();
