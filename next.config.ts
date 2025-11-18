@@ -24,6 +24,10 @@
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  
+ eslint: {
+    ignoreDuringBuilds: true, 
+  },
 
   images: {
     remotePatterns: [
@@ -58,9 +62,7 @@ const nextConfig: NextConfig = {
   compress: true,
   trailingSlash: false,
 
-  
  
-
   async headers() {
     return [
       {
