@@ -51,7 +51,7 @@ export default function GlobalOverlays() {
   const { language: lang, selectLanguage } = useLanguage();
   const { user, signOut } = useAuth();
 
-  /* --------------- WELCOME MODAL --------------- */
+  /* --------------- WELCOME MODAL --------------- 
   if (showWelcome) {
     return (
       <ModalBase title={t(lang, "welcome")} onClose={closeAll}>
@@ -70,7 +70,7 @@ export default function GlobalOverlays() {
       </ModalBase>
     );
   }
-
+*/
   /* --------------- LANGUAGE MODAL --------------- */
   if (showLanguage) {
     return (
@@ -97,7 +97,7 @@ export default function GlobalOverlays() {
     );
   }
 
-  /* --------------- STATE SELECTOR --------------- */
+ 
 /* --------------- STATE SELECTOR --------------- */
 if (showState) {
   return (

@@ -4,13 +4,13 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 import { useAuth } from "@/contexts/AuthContext";
 
 export interface OverlayContextProps {
-  showWelcome: boolean;
+ 
   showLanguage: boolean;
   showState: boolean;
   showFeedback: boolean;
   showLogin: boolean;
 
-  openWelcome: () => void;
+ 
   openLanguage: () => void;
   openState: () => void;
   openFeedback: () => void;
@@ -22,12 +22,12 @@ export interface OverlayContextProps {
 }
 
 const OverlayContext = createContext<OverlayContextProps>({
-  showWelcome: false,
+ 
   showLanguage: false,
   showState: false,
   showFeedback: false,
   showLogin: false,
-  openWelcome: () => {},
+ 
   openLanguage: () => {},
   openState: () => {},
   openFeedback: () => {},
@@ -47,15 +47,15 @@ export function OverlayProvider({ children }: { children: ReactNode }) {
   const { bootstrapped: authReady, user } = useAuth();
 
   const checkInitialModals = () => {
-    const welcomeSeen = localStorage.getItem("welcomeSeen");
+ 
     const lang = localStorage.getItem("appLanguage");
     if (!lang) localStorage.setItem("appLanguage", "en");
 
-    if (!welcomeSeen) {
+   /* if (!welcomeSeen) {
       setShowWelcome(true);
       setBootstrapped(false);
       return;
-    }
+    }*/
     setShowWelcome(false);
     setShowLanguage(false);
     setShowState(false);
@@ -78,11 +78,11 @@ export function OverlayProvider({ children }: { children: ReactNode }) {
     setShowLogin(false);
   };
 
-  const openWelcome = () => {
+  /*const openWelcome = () => {
     closeAll();
     setShowWelcome(true);
     setBootstrapped(false);
-  };
+  };*/
   const openLanguage = () => {
     closeAll();
     setShowLanguage(true);
@@ -105,13 +105,12 @@ export function OverlayProvider({ children }: { children: ReactNode }) {
   return (
     <OverlayContext.Provider
       value={{
-        showWelcome,
+
         showLanguage,
         showState,
         showFeedback,
         showLogin,
-        openWelcome,
-        openLanguage,
+    openLanguage,
         openState,
         openFeedback,
         openLogin,
