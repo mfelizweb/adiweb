@@ -53,10 +53,7 @@ const nextConfig: NextConfig = {
     reactCompiler: true,
   },
 
-  i18n: {
-    locales: ["en", "es"],
-    defaultLocale: "en",
-  },
+ 
 
   poweredByHeader: false,
   compress: true,

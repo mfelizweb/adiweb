@@ -1,5 +1,8 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 import React, { useEffect, useState, useCallback } from "react";
 import { ExploreHeader, ExploreList, ExploreMap } from "@/components/explore";
 import { t, type Lang } from "@/i18n/config";
@@ -7,6 +10,7 @@ import { supabase } from "@/lib/supabase";
 import { trackEvent } from "@/lib/trackEvent";
 import { useStateContext } from "@/contexts/StateContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { redirect } from "next/navigation";
 
 type ViewMode = "list" | "map";
 
@@ -37,6 +41,7 @@ function mergeSponsoredEveryN(data: any[], region: string, everyN = 6): any[] {
 }
 
 export default function ExplorePage() {
+ 
     const { language: lang } = useLanguage();
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [searchInput, setSearchInput] = useState("");
