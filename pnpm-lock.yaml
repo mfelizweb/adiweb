@@ -20,9 +20,12 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.75.0
         version: 2.81.1
+<<<<<<< HEAD
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(next@15.5.5(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
+=======
+>>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -940,6 +943,7 @@ packages:
     cpu: [x64]
     os: [win32]
 
+<<<<<<< HEAD
   '@vercel/analytics@1.5.0':
     resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
     peerDependencies:
@@ -966,6 +970,8 @@ packages:
       vue-router:
         optional: true
 
+=======
+>>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -3272,11 +3278,14 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
+<<<<<<< HEAD
   '@vercel/analytics@1.5.0(next@15.5.5(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)':
     optionalDependencies:
       next: 15.5.5(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react: 19.2.0
 
+=======
+>>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
       acorn: 8.15.0

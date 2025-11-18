@@ -13,7 +13,10 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@react-google-maps/api": "^2.20.7",
     "@supabase/supabase-js": "^2.75.0",
+<<<<<<< HEAD
     "@vercel/analytics": "^1.5.0",
+=======
+>>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "critters": "^0.0.23",

@@ -13,8 +13,11 @@ import Navbar from "@/components/Navbar";
 import GlobalLoader from "@/components/GlobalLoader";  
 import StoreInstallBanner from "@/components/StoreInstallBanner";
 
+<<<<<<< HEAD
 import { Analytics } from "@vercel/analytics/next"
 
+=======
+>>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
 export const metadata = {
   title: "Adonde Ir",
   description: "Explora y planifica tus viajes con Adonde Ir",
@@ -48,8 +51,11 @@ export default function RootLayout({
             </LanguageProvider>
           </OverlayProvider>
         </AuthProvider>
+<<<<<<< HEAD
 
         <Analytics />
+=======
+>>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
       </body>
     </html>
   );

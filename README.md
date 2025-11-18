@@ -186,4 +186,4 @@ ADI — Adonde Ir
 Construido por viajeros, para viajeros.
 📧 info@mfelizweb.com
 
-🌐 https://adondeir.app
+🌐 https://adondeir.net

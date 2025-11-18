@@ -434,6 +434,7 @@ export default function PlaceDetailPage() {
       {/* Modal Login */}
 <LoginModal open={showLogin} onClose={() => setShowLogin(false)} lang={lang} />
 
+<<<<<<< HEAD
 
       {/* Schema.org for SEO */}
       {place && (
@@ -476,6 +477,8 @@ export default function PlaceDetailPage() {
         />
       )}
 
+=======
+>>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
     </main>
   );
 }
