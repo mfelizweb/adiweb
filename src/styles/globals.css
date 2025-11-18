@@ -1,0 +1,125 @@
+ /* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "swiper/css";
+@import "swiper/css/pagination";
+@import "swiper/css/navigation";
+:root {
+  /* Paleta base (AA contrast ready) */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --muted: 210 20% 96%;
+  --accent: 210 100% 98%;
+
+  /* Verde ADI #10b981 */
+  --primary: 160 84% 39%;
+  --primary-foreground: 0 0% 100%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --ring: 160 84% 39%;
+}
+/* Scrollbar sutil */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.dark {
+  --background: 222 47% 5%;
+  --foreground: 210 40% 98%;
+  --muted: 222 14% 12%;
+  --accent: 222 12% 14%;
+  --card: 222 47% 7%;
+  --card-foreground: 210 40% 98%;
+}
+
+/* ✅ Corregido: @apply responsivo dentro de @layer 
+@layer components {
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
+*/
+/* Gradiente Hero animado (bajo contraste para no saturar) */
+ .hero-gradient {
+  background: linear-gradient(135deg, #10b981 0%, #0891b2 50%, #2563eb 100%);
+  background-size: 400% 400%;
+}
+
+.animate-gradient {
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Chips scrollables */
+.chips-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.chips-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+ 
+.shadow-soft {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Focus visible accesible */
+:focus-visible {
+  outline: 3px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Tamaños objetivo toque */
+.btn-touch {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Ocultar scrollbars en chips scroll horizontal sin romper accesibilidad */
+.chips-scroll {
+  scrollbar-width: thin;
+}
+
+/* Utilidad para clamped text */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  
+}
+
+@keyframes zoomPulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.animate-zoomPulse {
+  animation: zoomPulse 1.3s ease-in-out infinite;
+}

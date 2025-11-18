@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.adondeir.com",
+      "sha256_cert_fingerprints": [
+        "DA:52:A6:39:09:27:7E:30:04:DA:6B:50:51:0C:3E:52:7B:04:3F:5C:4E:6C:DA:93:26:E4:03:DB:B3:04:54:57"
+      ]
+    }
+  }
+]
