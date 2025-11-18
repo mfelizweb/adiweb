@@ -1,9 +1,15 @@
-import React from "react";
+ import React from "react";
 import { Hero } from "@/components/Hero";
 import { DestinosGrid } from "@/components/DestinosGrid";
 
-export default function HomePage({ params }: { params: { locale: string } }) {
-  const lang = params.locale as "es" | "en";
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const lang = (locale === "es" || locale === "en" ? locale : "es") as "es" | "en";
+
   return (
     <main>
       <Hero lang={lang} />
