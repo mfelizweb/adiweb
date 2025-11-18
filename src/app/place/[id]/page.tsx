@@ -1,7 +1,7 @@
  "use client";
 export const dynamic = "force-dynamic";
 import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import {
   MapPin,
@@ -44,10 +44,15 @@ interface Review {
   user_id: string;
   profiles?: { name?: string } | { name?: string }[] | null;
 }
+export default function PlaceDetailPage() {
+  const pathname = usePathname();
+  const locale = pathname.split("/")[1];
+  const lang: Lang = locale === "en" || locale === "es" ? locale : "es";
 
-export default function PlaceDetailPage({ lang = "es" as Lang }: { lang?: Lang }) {
   const { id } = useParams();
   const router = useRouter();
+ 
+ 
   const [place, setPlace] = useState<Place | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [ratingDist, setRatingDist] = useState<Record<number, number>>({});
