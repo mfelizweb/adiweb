@@ -1,5 +1,8 @@
 "use client";
- 
+ "use client";
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
