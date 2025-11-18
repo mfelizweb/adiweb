@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { locales, defaultLocale } from "@/i18n/config";
+import { locales, defaultLocale, type Lang } from "@/i18n/config";
+import RootLayout from "../layout";
 
 export default function LocaleLayout({
   children,
@@ -8,13 +9,20 @@ export default function LocaleLayout({
   children: ReactNode;
   params: { locale: string };
 }) {
-  const lang = locales.includes(params.locale as any)
-    ? params.locale
+  const lang: Lang = locales.includes(params.locale as Lang)
+    ? (params.locale as Lang)
     : defaultLocale;
 
   return (
     <html lang={lang}>
-      <body>{children}</body>
+      <body>
+        <RootLayout>{children}</RootLayout>
+      </body>
     </html>
   );
+}
+
+// ✅ Para que Next.js genere /en y /es automáticamente
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
 }
