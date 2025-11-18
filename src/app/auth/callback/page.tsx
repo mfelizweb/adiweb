@@ -1,31 +1,20 @@
 "use client";
 
-import { useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import { useRouter, useSearchParams } from "next/navigation";
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
-export default function CallbackInner() {
-  const params = useSearchParams();
-  const router = useRouter();
+import { Suspense } from "react";
+import CallbackInner from "./callback-inner";
+ 
 
-  useEffect(() => {
-    async function handleOAuth() {
-      const code = params.get("code");
-
-      if (code) {
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
-        if (error) console.error("Error exchanging code:", error);
-      }
-
-      router.replace("/profile");
-    }
-
-    handleOAuth();
-  }, [params, router]);
-
+export default function AuthCallbackPage() {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <p>...</p>
-    </div>
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-screen">
+        <p>...</p>
+      </div>
+    }>
+      <CallbackInner />
+    </Suspense>
   );
 }
