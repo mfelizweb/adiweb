@@ -1,16 +1,18 @@
-import { ReactNode } from "react";
+ import { ReactNode } from "react";
 import { locales, defaultLocale, type Lang } from "@/i18n/config";
 import RootLayout from "../layout";
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const lang: Lang = locales.includes(params.locale as Lang)
-    ? (params.locale as Lang)
+  const { locale } = await params;
+
+  const lang: Lang = locales.includes(locale as Lang)
+    ? (locale as Lang)
     : defaultLocale;
 
   return (
@@ -22,7 +24,6 @@ export default function LocaleLayout({
   );
 }
 
-// ✅ Para que Next.js genere /en y /es automáticamente
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
