@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useStateContext } from "@/contexts/StateContext";
 import { useOverlay } from "@/contexts/OverlayContext";
 import { useGoogleSignIn } from "@/hooks/useGoogleSignIn";
-import { signInWithApple } from "@/hooks/useAppleSignIn";
+ 
 import { useEmailAuth } from "@/hooks/useEmailAuth";
 import { toast } from "sonner";
 import {
