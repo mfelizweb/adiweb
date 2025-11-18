@@ -1,103 +1,232 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React, { useEffect, useState, useCallback } from "react";
+import { ExploreHeader, ExploreList, ExploreMap } from "@/components/explore";
+import { t, type Lang } from "@/i18n/config";
+import { supabase } from "@/lib/supabase";
+import { trackEvent } from "@/lib/trackEvent";
+import { useStateContext } from "@/contexts/StateContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+type ViewMode = "list" | "map";
+
+const PAGE_SIZE = 10;
+
+function generateSponsorCard(index: number, region: string) {
+  return {
+    id: `sponsored-${index}`,
+    isSponsored: true,
+    image_url:
+      index % 2 === 0
+        ? "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
+        : "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800",
+    region,
+    state: null,
+  };
+}
+
+function mergeSponsoredEveryN(data: any[], region: string, everyN = 6): any[] {
+  const merged = [];
+  for (let i = 0; i < data.length; i++) {
+    merged.push(data[i]);
+    if ((i + 1) % everyN === 0) {
+      merged.push(generateSponsorCard(i, region));
+    }
+  }
+  return merged;
+}
+
+export default function ExplorePage() {
+    const { language: lang } = useLanguage();
+  const [viewMode, setViewMode] = useState<ViewMode>("list");
+  const [searchInput, setSearchInput] = useState("");
+  const [selectedCat, setSelectedCat] = useState<string | null>(null);
+  const [places, setPlaces] = useState<any[]>([]);
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+
+ const { region, state } = useStateContext();
+
+
+  // 📍 Obtener lugares cercanos
+  const fetchNearby = async () => {
+    if (!navigator.geolocation) {
+      alert(t(lang, "not_allowed"));
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        const latRange = 0.1;
+        const lngRange = 0.1;
+
+        const minLat = latitude - latRange;
+        const maxLat = latitude + latRange;
+        const minLng = longitude - lngRange;
+        const maxLng = longitude + lngRange;
+
+        setLoading(true);
+
+        const { data, error } = await supabase
+          .from("places")
+          .select("*")
+          .gte("latitude", minLat)
+          .lte("latitude", maxLat)
+          .gte("longitude", minLng)
+          .lte("longitude", maxLng)
+          .limit(30);
+
+        if (!error && data) {
+          const cleaned = data.map((p) => ({
+            ...p,
+            image_url: p.image || p.image1 || p.image2 || null,
+          }));
+
+          const merged = mergeSponsoredEveryN(cleaned, region);
+          setPlaces(merged);
+          setPage(0);
+          setHasMore(false);
+
+          // 🎯 Track event RPC
+          trackEvent({
+            event_type: "location_search",
+            region,
+            state: null,
+          });
+        } else {
+          console.error("❌ Error ubicación:", error);
+        }
+
+        setLoading(false);
+      },
+      (err) => {
+        alert("No pudimos obtener tu ubicación.");
+        console.error(err);
+      },
+      { enableHighAccuracy: true }
+    );
+  };
+
+  // 📦 Cargar lugares paginados
+  const fetchPlaces = useCallback(
+    async (pageNumber = 0, append = false) => {
+      const from = pageNumber * PAGE_SIZE;
+      const to = from + PAGE_SIZE - 1;
+
+      if (append) setLoadingMore(true);
+      else {
+        setLoading(true);
+        setHasMore(true);
+      }
+
+let query = supabase
+  .from("places")
+  .select("*")
+  .eq("region", region)
+  .order("created_at", { ascending: false })
+  .range(from, to);
+
+if (state) query = query.eq("state", state);
+
+
+      if (selectedCat) query = query.eq("main_category", selectedCat);
+      if (searchInput)
+        query = query.or(
+          `name.ilike.%${searchInput}%,descripcion.ilike.%${searchInput}%,descripcion_en.ilike.%${searchInput}%`
+        );
+
+      const { data, error } = await query;
+
+      if (!error && data) {
+        const cleaned = data.map((p) => ({
+          ...p,
+          image_url: p.image || p.image1 || p.image2 || null,
+        }));
+
+        const merged = mergeSponsoredEveryN(cleaned, region);
+
+        if (append) {
+          setPlaces((prev) => [...prev, ...merged]);
+          setPage(pageNumber);
+        } else {
+          setPlaces(merged);
+          setPage(0);
+        }
+
+        setHasMore(data.length === PAGE_SIZE);
+      } else {
+        console.error("❌ Supabase error:", error);
+        if (!append) setPlaces([]);
+        setHasMore(false);
+      }
+
+      setLoading(false);
+      setLoadingMore(false);
+    },
+    [searchInput, selectedCat, region]
+  );
+
+  useEffect(() => {
+    fetchPlaces(0, false);
+  }, [fetchPlaces]);
+
+  // 🔍 Búsqueda manual + track event
+  const onSubmitSearch = () => {
+    trackEvent({
+      event_type: "search_performed",
+      destination: searchInput || null,
+      region,
+    });
+    fetchPlaces(0, false);
+  };
+
+  const loadMore = () => {
+    fetchPlaces(page + 1, true);
+  };
+
+  // 🧭 Render principal
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-screen bg-white">
+      <ExploreHeader
+        lang={lang}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        selectedCat={selectedCat}
+        setSelectedCat={setSelectedCat}
+        onSubmitSearch={onSubmitSearch}
+        onLocateMe={fetchNearby}
+      />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {viewMode === "list" ? (
+          <>
+            <ExploreList lang={lang} places={places} />
+            {hasMore && (
+              <div className="flex justify-center mt-10">
+                <button
+                  onClick={loadMore}
+                  disabled={loadingMore}
+                  className="px-6 py-2 rounded-full bg-emerald-600 text-white font-semibold hover:bg-emerald-700 disabled:opacity-50"
+                >
+                  {loadingMore
+                    ? t(lang, "loading")
+                    : t(lang, "loadMore")}
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <ExploreMap
+            lang={lang}
+            places={places.filter((p) => !p.isSponsored)}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        )}
+      </section>
+    </main>
   );
 }

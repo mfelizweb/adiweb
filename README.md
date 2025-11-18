@@ -1,36 +1,189 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🌎 ADI — Adonde Ir
+Descubre. Explora. Vive experiencias inolvidables.
+📖 Historia
 
-## Getting Started
+ADI nació en un viaje entre amigos en el Cibao, República Dominicana.
+Durante una visita espontánea a La Vega, nos dimos cuenta de que ―aunque queríamos disfrutar― no sabíamos adónde ir, qué lugares valían la pena, dónde comer o qué actividades hacer.
 
-First, run the development server:
+Google Maps no ayudaba.
+Los blogs estaban desactualizados.
+Los videos de YouTube no daban contexto real.
+No había una guía moderna, confiable y local.
 
-```bash
+Esa frustración se convirtió en una idea.
+Esa idea se convirtió en una app.
+La app evolucionó en una plataforma.
+
+Hoy, ADI es la forma más moderna de descubrir lugares, tours, actividades e itinerarios en República Dominicana y próximamente el mundo.
+
+✨ ¿Qué es ADI?
+
+ADI es una plataforma web + móvil para explorar lugares turísticos, descubrir actividades, crear itinerarios y reservar experiencias recomendadas.
+
+Incluye:
+
+🗺 Explorador de lugares con filtros inteligentes
+
+🔎 Buscador en tiempo real
+
+🧭 Itinerarios creados por la comunidad
+
+⭐ Favoritos, reseñas y calificaciones
+
+💬 Comentarios reales
+
+🎒 Tours patrocinados (Viator, GetYourGuide, Trip.com)
+
+🧠 Contenido SEO optimizado
+
+📍 Modo mapa con ubicación en tiempo real
+
+🌐 Web + App móvil (iOS/Android)
+
+🌗 Interfaz moderna, limpia y rápida
+
+🚀 Tecnologías principales
+Frontend
+
+Next.js 15 (App Router)
+
+React 18
+
+TailwindCSS
+
+shadcn/ui
+
+Lucide Icons
+
+Backend
+
+Supabase (Auth, Database, RLS, Storage)
+
+Edge Functions (lógica avanzada)
+
+Realtime listeners
+
+Infraestructura
+
+Vercel (hosting + CDN global)
+
+Optimización automática de imágenes
+
+Seguridad con headers personalizados
+
+📱 Características principales
+🗺 Explorador de Sitios
+
+Lugares categorizados
+
+Cards estilo Trip.com
+
+Imágenes optimizadas
+
+Scroll infinito
+
+Mapa integrado
+
+📍 Modo Mapa Inteligente
+
+Botón native-location azul
+
+Oculta filtros automáticamente
+
+UX móvil optimizada
+
+📖 Itinerarios
+
+Crear itinerarios propios
+
+Compartir por email
+
+Itinerarios públicos
+
+Calificaciones y comentarios
+
+⭐ Favoritos
+
+Guarda lugares
+
+Sincronizado con cuenta Supabase
+
+Multi-dispositivo
+
+🔎 Buscador inteligente
+
+Debounce
+
+Filtro automático al cerrar teclado
+
+Optimizado para SEO
+
+🧭 Tours patrocinados
+
+Integración nativa con Viator, GYG y Trip.com
+
+Cards patrocinadas
+
+Monetización real sin romper diseño
+
+🛡 Seguridad
+
+ADI utiliza una arquitectura segura:
+
+🔐 RLS de Supabase activado
+
+🧩 Policies basadas en auth.uid()
+
+🔒 Variables privadas con .env
+
+🕵️ Headers de seguridad en producción
+
+🌐 Solo HTTPS en Vercel
+
+🧱 Bloqueo de métodos no permitidos en API (405)
+
+ 
+
+
+Ejecutar local:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🚀 Deploy en Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Importar repositorio desde GitHub
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Agregar variables de entorno
 
-## Learn More
+Seleccionar Next.js como framework
 
-To learn more about Next.js, take a look at the following resources:
+Deploy automático en segundos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🧩 Roadmap Próximo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ADI Premium (suscripción)
 
-## Deploy on Vercel
+Modo viaje con checklist
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Mapas offline
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Recomendaciones personalizadas (AI)
+
+Reserva de hoteles
+
+Explorar por temporada
+
+App multiplataforma Community 2.0
+
+❤️ Contribuir
+
+Pull requests, ideas y mejoras son bienvenidas.
+ADI es una plataforma viva y en crecimiento.
+
+📬 Contacto
+
+ADI — Adonde Ir
+Construido por viajeros, para viajeros.
+📧 info@mfelizweb.com
+
+🌐 https://adondeir.app
