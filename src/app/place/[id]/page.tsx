@@ -1,5 +1,6 @@
- "use client";
+"use client";
 export const dynamic = "force-dynamic";
+
 import React, { useEffect, useState } from "react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
@@ -44,6 +45,7 @@ interface Review {
   user_id: string;
   profiles?: { name?: string } | { name?: string }[] | null;
 }
+
 export default function PlaceDetailPage() {
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
@@ -51,8 +53,7 @@ export default function PlaceDetailPage() {
 
   const { id } = useParams();
   const router = useRouter();
- 
- 
+
   const [place, setPlace] = useState<Place | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [ratingDist, setRatingDist] = useState<Record<number, number>>({});
@@ -360,11 +361,11 @@ export default function PlaceDetailPage() {
                 key={r.id}
                 className="border border-black/10 bg-card rounded-2xl p-4 shadow-sm"
               >
-               <p className="font-semibold text-foreground">
-  {Array.isArray(r.profiles)
-    ? r.profiles[0]?.name || t(lang, "anonymousUser")
-    : r.profiles?.name || t(lang, "anonymousUser")}
-</p>
+                <p className="font-semibold text-foreground">
+                  {Array.isArray(r.profiles)
+                    ? r.profiles[0]?.name || t(lang, "anonymousUser")
+                    : r.profiles?.name || t(lang, "anonymousUser")}
+                </p>
 
                 <div className="flex items-center gap-1 text-yellow-500">
                   {"⭐".repeat(r.rating)}
@@ -381,40 +382,34 @@ export default function PlaceDetailPage() {
         )}
 
         {/* Form */}
-   
-          <div className="mt-8 border border-black/10 bg-card rounded-3xl p-6 shadow-sm">
-            <h3 className="font-semibold text-lg mb-3">
-              {userReview ? t(lang, "editReview") : t(lang, "writeReview")}
-            </h3>
-            <div className="flex gap-2 mb-3">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <button
-                  key={i}
-                  onClick={() => setRating(i)}
-                  className="text-yellow-500"
-                >
-                  <Star
-                    size={26}
-                    fill={i <= rating ? "currentColor" : "none"}
-                    stroke="currentColor"
-                  />
-                </button>
-              ))}
-            </div>
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              placeholder={t(lang, "yourComment")}
-              className="w-full border border-gray-200 rounded-xl p-3 h-28 text-sm text-foreground/80 focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
-            />
-            <button
-              onClick={saveReview}
-              className="mt-3 bg-primary text-white font-medium px-5 py-2.5 rounded-xl hover:bg-primary/90 transition"
-            >
-              {t(lang, "saveReview")}
-            </button>
+        <div className="mt-8 border border-black/10 bg-card rounded-3xl p-6 shadow-sm">
+          <h3 className="font-semibold text-lg mb-3">
+            {userReview ? t(lang, "editReview") : t(lang, "writeReview")}
+          </h3>
+          <div className="flex gap-2 mb-3">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <button key={i} onClick={() => setRating(i)} className="text-yellow-500">
+                <Star
+                  size={26}
+                  fill={i <= rating ? "currentColor" : "none"}
+                  stroke="currentColor"
+                />
+              </button>
+            ))}
           </div>
-   
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder={t(lang, "yourComment")}
+            className="w-full border border-gray-200 rounded-xl p-3 h-28 text-sm text-foreground/80 focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
+          />
+          <button
+            onClick={saveReview}
+            className="mt-3 bg-primary text-white font-medium px-5 py-2.5 rounded-xl hover:bg-primary/90 transition"
+          >
+            {t(lang, "saveReview")}
+          </button>
+        </div>
       </section>
 
       {/* Map */}
@@ -432,9 +427,7 @@ export default function PlaceDetailPage() {
       )}
 
       {/* Modal Login */}
-<LoginModal open={showLogin} onClose={() => setShowLogin(false)} lang={lang} />
-
-<<<<<<< HEAD
+      <LoginModal open={showLogin} onClose={() => setShowLogin(false)} lang={lang} />
 
       {/* Schema.org for SEO */}
       {place && (
@@ -476,9 +469,6 @@ export default function PlaceDetailPage() {
           }}
         />
       )}
-
-=======
->>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
     </main>
   );
 }

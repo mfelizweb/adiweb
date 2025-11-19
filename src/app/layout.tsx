@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 
 import React from "react";
- 
+
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { OverlayProvider } from "@/contexts/OverlayContext";
@@ -10,14 +10,10 @@ import GlobalOverlays from "@/contexts/GlobalOverlays";
 import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
 
-import GlobalLoader from "@/components/GlobalLoader";  
+import GlobalLoader from "@/components/GlobalLoader";
 import StoreInstallBanner from "@/components/StoreInstallBanner";
+import { Analytics } from "@vercel/analytics/next";
 
-<<<<<<< HEAD
-import { Analytics } from "@vercel/analytics/next"
-
-=======
->>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
 export const metadata = {
   title: "Adonde Ir",
   description: "Explora y planifica tus viajes con Adonde Ir",
@@ -27,8 +23,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-})
- {
+}) {
   return (
     <html lang="es">
       <body className="min-h-screen bg-white text-gray-900">
@@ -36,9 +31,8 @@ export default function RootLayout({
           <OverlayProvider>
             <LanguageProvider>
               <StateProvider>
-
-                <GlobalLoader />  
-<StoreInstallBanner />
+                <GlobalLoader />
+                <StoreInstallBanner />
                 <Navbar />
 
                 <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -51,11 +45,8 @@ export default function RootLayout({
             </LanguageProvider>
           </OverlayProvider>
         </AuthProvider>
-<<<<<<< HEAD
 
         <Analytics />
-=======
->>>>>>> 72d1fb069fee65288b8d749d4c6f7d5347acf437
       </body>
     </html>
   );
