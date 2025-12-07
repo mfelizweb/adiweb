@@ -1,15 +1,11 @@
 // middleware.ts
-import createMiddleware from "next-intl/middleware";
-import { locales, defaultLocale } from "./src/i18n/config";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
-export default createMiddleware({
-  locales,
-  defaultLocale,
-  // 🔥 IMPORTANTE: sin prefijo en la URL
-  localePrefix: "never",
-});
+export function middleware(_req: NextRequest) {
+  return NextResponse.next();
+}
 
 export const config = {
-  // Esto aplica el middleware solo a rutas "normales"
-  matcher: ["/((?!_next|_vercel|favicon.ico|.*\\..*).*)"],
+  matcher: [],
 };
