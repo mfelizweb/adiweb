@@ -15,6 +15,7 @@ import Navbar from "@/components/Navbar";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/next";
 
+// Generate /en and /es routes
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -26,9 +27,8 @@ export default function LocaleLayout({
   children: ReactNode;
   params: { locale: string };
 }) {
-  const lang: Lang = locales.includes(params.locale as Lang)
-    ? (params.locale as Lang)
-    : defaultLocale;
+  const locale = params.locale as Lang;
+  const lang = locales.includes(locale) ? locale : defaultLocale;
 
   return (
     <html lang={lang}>
@@ -39,7 +39,6 @@ export default function LocaleLayout({
               <StateProvider>
                 <GlobalLoader />
                 <StoreInstallBanner />
-
                 <Navbar />
 
                 <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
