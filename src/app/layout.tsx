@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+
 import React from "react";
 
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -8,6 +9,7 @@ import { StateProvider } from "@/contexts/StateContext";
 import GlobalOverlays from "@/contexts/GlobalOverlays";
 import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
+
 import GlobalLoader from "@/components/GlobalLoader";
 import StoreInstallBanner from "@/components/StoreInstallBanner";
 import { Analytics } from "@vercel/analytics/next";
