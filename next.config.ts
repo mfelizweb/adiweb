@@ -48,10 +48,11 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  experimental: {
-    optimizeCss: true,
-    reactCompiler: true,
-  },
+experimental: {
+  optimizeCss: true,
+},
+
+reactCompiler: true,
 
  
 
