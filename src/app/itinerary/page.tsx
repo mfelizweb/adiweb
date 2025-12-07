@@ -13,9 +13,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { IoPricetagOutline, IoCreateOutline, IoEyeOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { trackEvent } from "@/lib/trackEvent";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 
 /* ---------- TYPES ---------- */
 type Itinerary = {

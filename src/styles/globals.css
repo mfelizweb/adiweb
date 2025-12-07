@@ -2,9 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "swiper/css";
-@import "swiper/css/pagination";
-@import "swiper/css/navigation";
+ 
 :root {
   /* Paleta base (AA contrast ready) */
   --background: 0 0% 100%;
