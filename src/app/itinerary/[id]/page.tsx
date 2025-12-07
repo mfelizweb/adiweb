@@ -322,6 +322,32 @@ export default function ItineraryDetailPage() {
             {t(lang, "clone")}
           </Button>
         )}
+
+        {/* 📤 Compartir público */}
+<Button
+  variant="outline"
+  className="border-emerald-600 text-emerald-600 hover:bg-emerald-50"
+  onClick={() => {
+    const shareUrl = `https://adondeir.net/itinerary/${itinerary.id}`;
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: itinerary.name,
+          text: "Mira este itinerario en Adonde Ir",
+          url: shareUrl,
+        })
+        .catch(() => {});
+    } else {
+      navigator.clipboard.writeText(shareUrl);
+      toast.success("Enlace copiado");
+    }
+  }}
+>
+  <Copy className="w-4 h-4 mr-2" />
+  Compartir
+</Button>
+
       </div>
 
       {/* 📍 Lugares */}

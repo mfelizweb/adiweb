@@ -248,7 +248,9 @@
        "installApp": {
     "title": "Instala ADI",
     "subtitle": "Mejor rendimiento y acceso más rápido.",
-    "installButton": "Instalar"
+    "installButton": "Instalar",
+    "sponsored_restaurants":"Restaurante Patrocinado",
+ "explore_paid_options":"Explora Mas Opciones"
   }
 
 
