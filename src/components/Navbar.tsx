@@ -8,12 +8,14 @@ import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { t } from "@/i18n/config";
 
+
 const navItems = [
   { key: "explore", href: "/" },
-  { key: "itineraries", href: "/itineraries" },
+{ key: "itinerary", href: "/itinerary" },
   { key: "favorites", href: "/favorites" },
   { key: "profile", href: "/profile" },
 ];
+
 
 export default function Navbar() {
   const pathname = usePathname();

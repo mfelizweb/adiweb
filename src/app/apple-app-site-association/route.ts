@@ -7,7 +7,7 @@ export async function GET() {
       details: [
         {
           appID: "8T88595TPH.io.adondeir.com",
-          paths: ["/place/*"]
+          paths: ["/place/*", "/itinerary/*"]
         }
       ]
     }

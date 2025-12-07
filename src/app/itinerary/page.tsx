@@ -306,7 +306,7 @@ export default function ItinerariesPage() {
                 region,
                 state,
               });
-              router.push("/itineraries/create");
+              router.push("/itinerary/create");
             }}
             className="px-6 py-2 rounded-lg bg-emerald-600 text-white font-semibold shadow hover:shadow-lg hover:scale-105 transition-all duration-200"
           >
@@ -408,7 +408,7 @@ export default function ItinerariesPage() {
                     region: it.region,
                     state: it.state,
                   });
-                  router.push(`/itineraries/${it.id}?lang=${lang}`);
+                  router.push(`/itinerary/${it.id}?lang=${lang}`);
                 }}
                 className="cursor-pointer rounded-2xl bg-white shadow hover:shadow-xl hover:scale-[1.02] overflow-hidden transition-all duration-200"
               >
