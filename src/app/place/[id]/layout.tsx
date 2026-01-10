@@ -1,7 +1,21 @@
-import { supabase } from "@/lib/supabase";
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
 
 export async function generateMetadata({ params }: any) {
   const { id } = params;
+
+  const cookieStore = cookies();
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        async get(name) {
+          return (await cookieStore).get(name)?.value;
+        },
+      },
+    }
+  );
 
   // Cargar información del lugar desde Supabase
   const { data: place } = await supabase
@@ -37,8 +51,8 @@ export async function generateMetadata({ params }: any) {
     alternates: {
       canonical: `https://adondeir.net/place/${id}`,
       languages: {
-        "es": `https://adondeir.net/es/place/${id}`,
-        "en": `https://adondeir.net/en/place/${id}`,
+        es: `https://adondeir.net/es/place/${id}`,
+        en: `https://adondeir.net/en/place/${id}`,
       },
     },
 
@@ -71,4 +85,3 @@ export async function generateMetadata({ params }: any) {
 export default function PlaceLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
-    
