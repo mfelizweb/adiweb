@@ -12,7 +12,7 @@ export default function StoreInstallBanner() {
   const { language: lang } = useLanguage();
 
   // 🔗 Reemplázalos con tus enlaces reales
-  const IOS_URL = "https://apps.apple.com/us/developer/mfeliz-web/id1835473936";
+  const IOS_URL = "https://apps.apple.com/us/app/adondeir-travel/id6757012202";
   const ANDROID_URL = "https://play.google.com/store/apps/details?id=io.adondeir.com";
 
   useEffect(() => {
