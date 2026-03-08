@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 export async function generateMetadata({ params }: any) {
-  const { id } = params;
+  const { id } = await params;
 
   const cookieStore = cookies();
   const supabase = createServerClient(

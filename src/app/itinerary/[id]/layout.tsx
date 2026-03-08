@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 
 export async function generateMetadata({ params }: any) {
-  const { id } = params;
+  const { id } = await params;
 
   // Obtener itinerario
   const { data: itinerary } = await supabase
